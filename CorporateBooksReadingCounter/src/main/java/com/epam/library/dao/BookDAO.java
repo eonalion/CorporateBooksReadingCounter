@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class BookDAO extends AbstractDAO {
     private static final String SQL_SELECT_ALL_BOOKS = "SELECT * FROM `book`";
-    private static final String SQL_INSERT_BOOK = "INSERT INTO `book`(`title`, `author`, `brief`, `publish_year`) VALUES (?,?,?)";
+    private static final String SQL_INSERT_BOOK = "INSERT INTO `book`(`title`, `author`, `brief`, `publish_year`) VALUES (?,?,?,?)";
     private static final String SQL_DELETE_BOOK_BY_ID = "DELETE FROM `book` WHERE `id` = ?";
     private static final String SQL_DELETE_BOOK_BY_PARAMS = "DELETE FROM `book` WHERE `title` = ? AND `publish_year` = ? AND `author` = ?";
     private static final String SQL_SELECT_BOOK_BY_ID = "SELECT * FROM `book` WHERE `id` = ?";
@@ -41,15 +41,19 @@ public class BookDAO extends AbstractDAO {
             }
             return bookList;
         } catch (SQLException e) {
-            throw new DAOException("Error while selecting all books" + e);
+            throw new DAOException("Error while selecting all books.", e);
         }
     }
 
-    public void insertBook(String title, String author, String brief) {
+    public void insertBook(String title, String author, String brief, int publish_year) throws DAOException {
         try(PreparedStatement preparedStatement =  getConnection().prepareStatement(SQL_INSERT_BOOK)) {
-
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, author);
+            preparedStatement.setString(3, brief);
+            preparedStatement.setInt(4, publish_year);
+            preparedStatement.execute();
         } catch (SQLException e) {
-
+            throw new DAOException("Error while inserting new book.", e);
         }
     }
 

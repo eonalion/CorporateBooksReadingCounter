@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  *
@@ -23,14 +22,13 @@ public class Controller {
     }
 
     public CommandContainer read() {
-        BufferedReader br = null;
-        String command = "";
         CommandContainer commandContainer = new CommandContainer();
         try {
             BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+            LOG.info("Input:");
             String input = bufferRead.readLine();
             input = input.trim();
-            int delimiter = input.indexOf(" ");//TODO: check existence.
+            int delimiter = input.indexOf(" ");
             String commandString = null;
             String paramString = "";
             if (delimiter > 0) {
@@ -41,7 +39,7 @@ public class Controller {
             }
 
             commandContainer.setCommand(commandString);
-            commandContainer.setParams(paramString);
+            commandContainer.setParameters(paramString);
         } catch (IOException e) {
             LOG.fatal("Error while reading from console", e);
             throw new RuntimeException(e);
@@ -52,14 +50,10 @@ public class Controller {
 
     public void process(CommandContainer commandContainer) {
         ICommand command = commandManager.defineCommand(commandContainer.getCommand());
-        print(command.execute(commandContainer.getParams()));
+        print(command.execute(commandContainer.getParameters()));
     }
 
     private void print(String response) {
         System.out.println(response);
-    }
-
-    private void print (List<Object> list) {
-        list.forEach(System.out::println);
     }
 }

@@ -13,10 +13,10 @@ public class CommandManager {
     private static List<String> terminateCommands = new ArrayList<>();
 
     static {
-        commands.put("exit", new ExitCommand());
-        commands.put("menu", new ShowMenuCommand());
-        commands.put("view_all", new ShowAllCommand());
-        terminateCommands.add("exit");
+        commands.put(AvailableOperations.MENU_COMMAND, new ViewMenuCommand());
+        commands.put(AvailableOperations.VIEW_COMMAND, new ViewCommand());
+        commands.put(AvailableOperations.EXIT_COMMAND, new ExitCommand());
+        terminateCommands.add(AvailableOperations.EXIT_COMMAND);
     }
 
     public static boolean isTerminatingCommand(String command) {
@@ -24,7 +24,11 @@ public class CommandManager {
     }
 
     public ICommand defineCommand(String commandString) {
-        return commands.get(commandString);
+        if (commands.containsKey(commandString)) {
+            return commands.get(commandString);
+        } else {
+            return new FailureCommand(AvailableOperations.INVALID_COMMAND_MESSAGE);
+        }
     }
 
     public static Map<String, ICommand> getCommands() {

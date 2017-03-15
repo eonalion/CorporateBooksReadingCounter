@@ -3,11 +3,11 @@ package com.epam.library.dao;
 import com.epam.library.domain.Employee;
 import com.epam.library.exception.DAOException;
 
-import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,11 +39,23 @@ public class EmployeeDAO extends AbstractDAO {
             }
             return employeeList;
         } catch (SQLException e) {
-            throw new DAOException("Error while selecting all employee" + e);
+            throw new DAOException("Error while selecting all employee.",e);
         }
     }
 
-    public void insertEmployee(String name, Date dateOfBirth, String email) {}
+    public void insertEmployee(String name, LocalDate dateOfBirth, String email) throws DAOException {
+        //TODO: use LocalDate
+        try(PreparedStatement preparedStatement =  getConnection().prepareStatement(SQL_INSERT_EMPLOYEE)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setDate(2, Date.valueOf(dateOfBirth));
+            preparedStatement.setString(3, email);
+            preparedStatement.execute();
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new DAOException("Error while inserting new employee.", e);
+        }
+    }
+
     //public Employee selectEmployeeById(int id) {}
     public void deleteEmployeeById(int id) {}
     public void deleteEmployeeByParams(String name, Date dateOfBirth, String email) {}

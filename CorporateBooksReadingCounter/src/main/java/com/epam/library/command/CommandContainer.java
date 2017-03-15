@@ -5,21 +5,21 @@ package com.epam.library.command;
  */
 public class CommandContainer {
     private String command;
-    private String params;
+    private String parameters;
 
     public void setCommand(String command) {
         this.command = command;
     }
 
-    public void setParams(String params) {
-        this.params = params;
+    public void setParameters(String parameters) {
+        this.parameters = parameters;
     }
 
     public String getCommand() {
         return command;
     }
 
-    public String getParams() {
-        return params;
+    public String getParameters() {
+        return parameters;
     }
 }

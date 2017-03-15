@@ -5,7 +5,6 @@ import com.epam.library.domain.Employee;
 import com.epam.library.exception.DAOException;
 import com.epam.library.exception.ServiceException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,15 +12,17 @@ import java.util.List;
  */
 public class EmployeeService implements IService<Employee> {
     @Override
-    public List<Employee> showAll() throws ServiceException {
+    public String showAll() throws ServiceException {
         EmployeeDAO employeeDAO = new EmployeeDAO();
-        List<Employee> employeeList = new ArrayList<>();
+        List<Employee> employeeList;
+        StringBuffer empListReport = new StringBuffer();
         try {
             employeeList = employeeDAO.selectAllEmployees();
+            employeeList.forEach(e -> empListReport.append(e).append("\n"));
         } catch (DAOException e) {
             throw new ServiceException("Error while showing all employees", e);
         }
-        return employeeList;
+        return empListReport.toString();
     }
 
     @Override
