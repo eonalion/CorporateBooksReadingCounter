@@ -4,3 +4,6 @@
 *.jar
 **/target/
 **/.idea/
+**/logs/
+*.mwb
+*.bak
