@@ -46,6 +46,11 @@ public class BookDAO extends AbstractDAO {
     }
 
     public void insertBook(String title, String author, String brief) {
+        try(PreparedStatement preparedStatement =  getConnection().prepareStatement(SQL_INSERT_BOOK)) {
+
+        } catch (SQLException e) {
+
+        }
     }
 
     public void deleteBookById(int id) {}

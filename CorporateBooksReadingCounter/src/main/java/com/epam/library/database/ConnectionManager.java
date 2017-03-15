@@ -22,7 +22,6 @@ public class ConnectionManager {
 
     private void createConnection() {
         dbInitializer = new DatabaseInitializer();
-
         try {
             Class.forName(dbInitializer.DRIVER).newInstance();
         } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {

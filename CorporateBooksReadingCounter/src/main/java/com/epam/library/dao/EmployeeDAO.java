@@ -14,9 +14,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class EmployeeDAO extends AbstractDAO {
-    private Connection connection;
-
+public class EmployeeDAO extends AbstractDAO {
     private static final String SQL_SELECT_ALL_EMPLOYEE = "SELECT * FROM `employee`";
     private static final String SQL_INSERT_EMPLOYEE = "INSERT INTO `employee` (`name`, `date_of_birth`, `email`) VALUES(?,?,?)";
     private static final String SQL_SELECT_EMPLOYEE_BY_ID = "SELECT * FROM `employee` WHERE `id` = ?";
@@ -28,12 +26,8 @@ public abstract class EmployeeDAO extends AbstractDAO {
     private static final String COLUMN_DATE_OF_BIRTH = "date_of_birth";
     private static final String COLUMN_EMAIL = "email";
 
-    public EmployeeDAO(Connection connection) {
-        this.connection = connection;
-    }
-
-    public List<Employee> selectAllBooks() throws DAOException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_EMPLOYEE)) {
+    public List<Employee> selectAllEmployees() throws DAOException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_SELECT_ALL_EMPLOYEE)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Employee> employeeList = new LinkedList<>();
             while (resultSet.next()) {
