@@ -20,7 +20,7 @@ public class BookDAO extends AbstractDAO {
     private static final String SQL_SELECT_BOOK_BY_ID = "SELECT * FROM `book` WHERE `id` = ?";
     private static final String SQL_UPDATE_BOOK_BY_ID = "UPDATE `book` SET `title` = ?,  `author` = ?, `brief` = ?, `publish_year` = ? WHERE `id` = ?";
     private static final String SQL_UPDATE_BOOK_TITLE = "UPDATE `book` SET `title` = ? WHERE `title` = ?";
-    private static final String SQL_UPDATE_BOOK_TITLE_BY_MASK = "UPDATE `book` SET `title` = ? WHERE `title` LIKE ?";
+    private static final String SQL_UPDATE_BOOK_TITLE_BY_REGEXP = "UPDATE `book` SET `title` = ? WHERE `title` REGEXP ?";
 
     private static final String COLUMN_TITLE = "title";
     private static final String COLUMN_AUTHOR = "author";
@@ -106,18 +106,20 @@ public class BookDAO extends AbstractDAO {
         }
     }
 
-    public void updateBookTitle(String title) throws DAOException {
+    public void updateBookTitle(String oldTitle, String newTitle) throws DAOException {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_UPDATE_BOOK_TITLE)) {
-            preparedStatement.setString(1, title);
+            preparedStatement.setString(1, newTitle);
+            preparedStatement.setString(2, oldTitle);
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DAOException("Error while updating book title.", e);
         }
     }
 
-    public void updateBookTitleByMask(String titleMask) throws DAOException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_UPDATE_BOOK_TITLE_BY_MASK)) {
-            preparedStatement.setString(1, titleMask);
+    public void updateBookTitleByMask(String titleMask, String newTitle) throws DAOException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_UPDATE_BOOK_TITLE_BY_REGEXP)) {
+            preparedStatement.setString(1, newTitle);
+            preparedStatement.setString(2, titleMask);
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DAOException("Error while updating book title by mask.", e);

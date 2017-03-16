@@ -21,14 +21,16 @@ public class EmployeeDAO extends AbstractDAO {
     private static final String SQL_DELETE_EMPLOYEE_BY_ID = "DELETE FROM `employee` WHERE `id` = ?";
     private static final String SQL_DELETE_EMPLOYEE_BY_PARAMS = "DELETE FROM `employee` WHERE `name` = ? AND `date_of_birth` = ? AND `email` = ?";
     private static final String SQL_UPDATE_EMPLOYEE_BY_ID = "UPDATE `employee` SET `name` = ?, `date_of_birth` = ?, `email` = ? WHERE `id` = ?";
-    private static final String SQL_SELECT_EMPS_WITH_MORE_THAN_ONE_BOOK = "SELECT * FROM(SELECT e.name, e.date_of_birth, e.email, COUNT(b_e.book_id) number_of_books FROM employee e\n" +
-            "  INNER JOIN book_has_employee b_e ON e.id = b_e.employee_id\n" +
-            "GROUP BY e.name\n" +
-            "ORDER BY number_of_books) inner_table WHERE number_of_books > 1";
-    private static final String SQL_SELECT_EMPS_WITH_LESS_OR_EQ_THAN_TWO_BOOKS = "SELECT * FROM(SELECT e.name, e.date_of_birth, COUNT(b_e.book_id) number_of_books FROM employee e\n" +
-            "  INNER JOIN book_has_employee b_e ON e.id = b_e.employee_id\n" +
-            "GROUP BY e.name\n" +
-            "ORDER BY number_of_books) inner_table WHERE number_of_books <= 2";
+    private static final String SQL_SELECT_EMPS_WITH_MORE_THAN_ONE_BOOK = "SELECT e.name, COUNT(b_e.book_id) number_of_books FROM employee e\n" +
+            "      INNER JOIN book_has_employee b_e ON e.id = b_e.employee_id\n" +
+            "      GROUP BY e.name\n" +
+            "      HAVING number_of_books > 1\n" +
+            "      ORDER BY number_of_books";
+    private static final String SQL_SELECT_EMPS_WITH_LESS_OR_EQ_THAN_TWO_BOOKS = "SELECT e.name, COUNT(b_e.book_id) number_of_books FROM employee e\n" +
+            "      INNER JOIN book_has_employee b_e ON e.id = b_e.employee_id\n" +
+            "      GROUP BY e.name\n" +
+            "      HAVING number_of_books <= 2\n" +
+            "      ORDER BY number_of_books;";
 
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_DATE_OF_BIRTH = "date_of_birth";

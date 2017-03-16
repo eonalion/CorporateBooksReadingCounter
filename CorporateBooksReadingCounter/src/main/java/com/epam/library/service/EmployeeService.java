@@ -44,4 +44,24 @@ public class EmployeeService implements IService<Employee> {
     public void showById(int id) {
 
     }
+
+    public String getSqlSelectEmpsWithMoreThanOneBook() throws ServiceException {
+        try {
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            return employeeDAO.getSqlSelectEmpsWithMoreThanOneBook();
+        } catch (DAOException e){
+            throw new ServiceException("Error while showing all employees", e);
+        }
+    }
+
+    public String getSqlSelectEmpsWithLessOrEqThanTwoBooks() throws ServiceException {
+        try {
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            return employeeDAO.getSqlSelectEmpsWithLessOrEqThanTwoBooks();
+        } catch (DAOException e) {
+            throw new ServiceException("Error while showing all employees", e);
+        }
+    }
+
+
 }

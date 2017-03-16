@@ -8,7 +8,7 @@ import com.epam.library.controller.Controller;
  *
  */
 public class App {
-    private static final String START_MESSAGE = "You are using Library CLI. Print 'menu' to view available operations.";
+    private static final String START_MESSAGE = "You are running Library CLI. Enter 'menu' to view available operations.";
 
     public static void main(String[] args) {
         run();

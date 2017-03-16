@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
  */
 public class ViewCommand implements ICommand {
 
+    //TODO: Add options to view single book and employee
+
     private static final Logger LOG = LogManager.getLogger();
     @Override
     public String execute(String params) {

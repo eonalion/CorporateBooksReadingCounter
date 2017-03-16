@@ -7,6 +7,7 @@ import com.epam.library.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,6 +47,19 @@ public class BookService implements IService<Book> {
     @Override
     public void showById(int id) {
 
+    }
+
+    public void renameBook(String titleOrMask, String newTitle, boolean byMask) throws ServiceException {
+        BookDAO bookDAO = new BookDAO();
+        try {
+            if (byMask) {
+                bookDAO.updateBookTitleByMask(titleOrMask, newTitle);
+            } else {
+                bookDAO.updateBookTitle(titleOrMask, newTitle);
+            }
+        } catch (DAOException e) {
+            throw new ServiceException("Error while rename book", e);
+        }
     }
 
 }
