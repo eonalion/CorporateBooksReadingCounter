@@ -3,6 +3,7 @@ package com.epam.library.app;
 import com.epam.library.command.CommandContainer;
 import com.epam.library.command.CommandManager;
 import com.epam.library.controller.Controller;
+import com.epam.library.database.ConnectionManager;
 
 /**
  *
@@ -16,12 +17,16 @@ public class App {
 
     private static void run() {
         System.out.println(START_MESSAGE);
-        Controller controller = new Controller();
-        CommandContainer commandContainer;
-        do {
-            commandContainer = controller.read();
-            controller.process(commandContainer);
+        try {
+            Controller controller = new Controller();
+            CommandContainer commandContainer;
+            do {
+                commandContainer = controller.read();
+                controller.process(commandContainer);
+            }
+            while (!CommandManager.isTerminatingCommand(commandContainer.getCommand()));
+        } finally {
+            ConnectionManager.closeConnection();
         }
-        while (!CommandManager.isTerminatingCommand(commandContainer.getCommand()));
     }
 }

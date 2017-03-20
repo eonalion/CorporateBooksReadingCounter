@@ -3,6 +3,7 @@ package com.epam.library.dao;
 import com.epam.library.database.ConnectionManager;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -17,5 +18,4 @@ public abstract class AbstractDAO {
     public Connection getConnection(){
         return connection;
     }
-
 }
