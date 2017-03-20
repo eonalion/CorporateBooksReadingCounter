@@ -1,7 +1,7 @@
 package com.epam.library.service;
 
 import com.epam.library.dao.EmployeeDAO;
-import com.epam.library.domain.Employee;
+import com.epam.library.entity.Employee;
 import com.epam.library.exception.DAOException;
 import com.epam.library.exception.ServiceException;
 

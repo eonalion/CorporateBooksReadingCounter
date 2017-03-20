@@ -2,13 +2,12 @@ package com.epam.library.service;
 
 import com.epam.library.dao.BookDAO;
 import com.epam.library.dao.DAOFactory;
-import com.epam.library.domain.Book;
+import com.epam.library.entity.Book;
 import com.epam.library.exception.DAOException;
 import com.epam.library.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
