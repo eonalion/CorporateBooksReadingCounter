@@ -1,6 +1,7 @@
 package com.epam.library.service;
 
 import com.epam.library.dao.BookDAO;
+import com.epam.library.dao.DAOFactory;
 import com.epam.library.domain.Book;
 import com.epam.library.exception.DAOException;
 import com.epam.library.exception.ServiceException;
@@ -13,12 +14,10 @@ import java.util.List;
 /**
  *
  */
-public class BookService implements IService<Book> {
+public class BookService {
     private static final Logger LOG = LogManager.getLogger();
-
-    @Override
     public String showAll() throws ServiceException {
-        BookDAO bookDAO = new BookDAO();
+        BookDAO bookDAO = DAOFactory.getBookDAO();
         List<Book> bookList;
         StringBuffer bookListReport = new StringBuffer();
         try {
@@ -30,27 +29,8 @@ public class BookService implements IService<Book> {
         return bookListReport.toString();
     }
 
-    @Override
-    public void insert(Book book) {
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
-
-    @Override
-    public void delete(Book book) {
-
-    }
-
-    @Override
-    public void showById(int id) {
-
-    }
-
     public boolean renameBook(String titleOrMask, String newTitle, boolean byMask) throws ServiceException {
-        BookDAO bookDAO = new BookDAO();
+        BookDAO bookDAO = DAOFactory.getBookDAO();
         boolean updateResult = false;
         try {
             if (byMask) {

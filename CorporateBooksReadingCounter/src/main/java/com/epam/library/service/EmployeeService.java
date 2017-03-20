@@ -10,8 +10,7 @@ import java.util.List;
 /**
  *
  */
-public class EmployeeService implements IService<Employee> {
-    @Override
+public class EmployeeService {
     public String showAll() throws ServiceException {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         List<Employee> employeeList;
@@ -23,26 +22,6 @@ public class EmployeeService implements IService<Employee> {
             throw new ServiceException("Error while showing all employees", e);
         }
         return empListReport.toString();
-    }
-
-    @Override
-    public void insert(Employee employee) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
-
-    @Override
-    public void delete(Employee employee) {
-
-    }
-
-    @Override
-    public void showById(int id) {
-
     }
 
     public String getSqlSelectEmpsWithMoreThanOneBook() throws ServiceException {

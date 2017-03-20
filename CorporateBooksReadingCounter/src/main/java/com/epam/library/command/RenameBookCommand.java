@@ -2,6 +2,7 @@ package com.epam.library.command;
 
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookService;
+import com.epam.library.service.ServiceFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +22,7 @@ public class RenameBookCommand implements ICommand {
 
     @Override
     public String execute(String params) {
-        BookService bookService = new BookService();
+        BookService bookService = ServiceFactory.getBookService();
         List<String> paramData = Arrays.asList(params.split(" ", 3));
         String response = "";
         boolean bookRenamed = true;

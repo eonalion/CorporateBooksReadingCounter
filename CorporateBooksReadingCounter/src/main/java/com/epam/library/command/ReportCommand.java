@@ -2,6 +2,7 @@ package com.epam.library.command;
 
 import com.epam.library.exception.ServiceException;
 import com.epam.library.service.EmployeeService;
+import com.epam.library.service.ServiceFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +15,8 @@ public class ReportCommand implements ICommand {
     @Override
     public String execute(String params) {
         String reportString = "";
-        EmployeeService employeeService = new EmployeeService();      try {
+        EmployeeService employeeService = ServiceFactory.getEmployeeService();
+        try {
             switch (params) {
                 case AvailableOperations.MORE_THAN_1_PARAM:
                     reportString = employeeService.getSqlSelectEmpsWithMoreThanOneBook();
