@@ -106,23 +106,31 @@ public class BookDAO extends AbstractDAO {
         }
     }
 
-    public void updateBookTitle(String oldTitle, String newTitle) throws DAOException {
+    public boolean updateBookTitle(String oldTitle, String newTitle) throws DAOException {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_UPDATE_BOOK_TITLE)) {
             preparedStatement.setString(1, newTitle);
             preparedStatement.setString(2, oldTitle);
-            preparedStatement.execute();
+            int updatedRows = preparedStatement.executeUpdate();
+            if (updatedRows > 0) {
+                return true;
+            }
         } catch (SQLException e) {
             throw new DAOException("Error while updating book title.", e);
         }
+        return false;
     }
 
-    public void updateBookTitleByMask(String titleMask, String newTitle) throws DAOException {
+    public boolean updateBookTitleByMask(String titleMask, String newTitle) throws DAOException {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_UPDATE_BOOK_TITLE_BY_REGEXP)) {
             preparedStatement.setString(1, newTitle);
             preparedStatement.setString(2, titleMask);
-            preparedStatement.execute();
+            int updatedRows = preparedStatement.executeUpdate();
+            if (updatedRows > 0) {
+                return true;
+            }
         } catch (SQLException e) {
             throw new DAOException("Error while updating book title by mask.", e);
         }
+        return false;
     }
 }

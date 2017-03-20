@@ -18,8 +18,8 @@ public class AvailableOperations {
     public static final String MASK_PARAM = "m";
     public static final String TITLE_PARAM = "t";
 
-
     public static final String INVALID_COMMAND_MESSAGE = "Failed: invalid command";
     public static final String INVALID_PARAMETER_LIST_MESSAGE = "Failed: invalid parameter list";
+    public static final String INVALID_TITLE_MESSAGE = "Failed: no book with such title was found in database";
     public static final String EXIT_MESSAGE = "Application was terminated";
 }

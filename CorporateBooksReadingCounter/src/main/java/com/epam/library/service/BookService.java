@@ -49,17 +49,19 @@ public class BookService implements IService<Book> {
 
     }
 
-    public void renameBook(String titleOrMask, String newTitle, boolean byMask) throws ServiceException {
+    public boolean renameBook(String titleOrMask, String newTitle, boolean byMask) throws ServiceException {
         BookDAO bookDAO = new BookDAO();
+        boolean updateResult = false;
         try {
             if (byMask) {
-                bookDAO.updateBookTitleByMask(titleOrMask, newTitle);
+                updateResult = bookDAO.updateBookTitleByMask(titleOrMask, newTitle);
             } else {
-                bookDAO.updateBookTitle(titleOrMask, newTitle);
+                updateResult = bookDAO.updateBookTitle(titleOrMask, newTitle);
             }
         } catch (DAOException e) {
             throw new ServiceException("Error while rename book", e);
         }
+        return updateResult;
     }
 
 }
