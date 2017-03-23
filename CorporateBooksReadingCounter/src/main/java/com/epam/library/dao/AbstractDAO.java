@@ -15,7 +15,10 @@ public abstract class AbstractDAO {
         connection = ConnectionManager.getConnectionInstance();
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() throws SQLException {
+        if (connection.isClosed()) {
+            connection = ConnectionManager.getConnectionInstance();
+        }
         return connection;
     }
 }
