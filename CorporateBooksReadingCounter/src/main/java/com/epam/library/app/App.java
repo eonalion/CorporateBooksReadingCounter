@@ -9,6 +9,9 @@ import com.epam.library.database.ConnectionManager;
  *
  */
 public class App {
+    private App() {
+    }
+
     private static final String START_MESSAGE = "You are running Library CLI. Enter 'menu' to view available operations.";
 
     public static void main(String[] args) {
