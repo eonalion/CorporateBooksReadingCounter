@@ -14,11 +14,10 @@ import java.util.List;
  *
  */
 public class BookService {
-    private static final Logger LOG = LogManager.getLogger();
     public String showAll() throws ServiceException {
         BookDAO bookDAO = DAOFactory.getBookDAO();
         List<Book> bookList;
-        StringBuffer bookListReport = new StringBuffer();
+        StringBuilder bookListReport = new StringBuilder();
         try {
             bookList = bookDAO.selectAllBooks();
             bookList.forEach(b -> bookListReport.append(b).append("\n"));

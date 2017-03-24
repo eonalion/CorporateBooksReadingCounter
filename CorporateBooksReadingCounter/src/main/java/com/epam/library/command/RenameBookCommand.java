@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class RenameBookCommand implements ICommand {
     private static final Logger LOG = LogManager.getLogger();
-    private static int MASK_OR_TITLE_INDEX = 0;
-    private static int OLD_TITLE_OR_MASK_INDEX = 1;
-    private static int NEW_TITLE_INDEX = 2;
+    private static final int MASK_OR_TITLE_INDEX = 0;
+    private static final int OLD_TITLE_OR_MASK_INDEX = 1;
+    private static final int NEW_TITLE_INDEX = 2;
 
     private static final String SUCCESS_MESSAGE = "Book was renamed to ";
 

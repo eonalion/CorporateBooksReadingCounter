@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  *
  */
-public class Employee implements IDatabaseEntity    {
+public class Employee implements IDatabaseEntity {
     private int id;
     private String name;
     private Date dateOfBirth;
@@ -71,8 +71,12 @@ public class Employee implements IDatabaseEntity    {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Employee employee = (Employee) o;
         return Objects.equals(name, employee.name) &&
                 Objects.equals(dateOfBirth, employee.dateOfBirth) &&

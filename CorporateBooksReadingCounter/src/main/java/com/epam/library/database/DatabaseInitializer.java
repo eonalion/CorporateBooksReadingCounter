@@ -13,18 +13,18 @@ class DatabaseInitializer {
 
     private static final Logger LOG = LogManager.getLogger();
 
-    final String DRIVER;
-    final String URL;
-    final String LOGIN;
-    final String PASSWORD;
+    final String driver;
+    final String url;
+    final String login;
+    final String password;
 
     DatabaseInitializer() {
         try {
             ResourceBundle resourceBundle = ResourceBundle.getBundle("properties.database");
-            DRIVER = resourceBundle.getString("db.driver");
-            URL = resourceBundle.getString("db.url");
-            LOGIN = resourceBundle.getString("db.login");
-            PASSWORD = resourceBundle.getString("db.password");
+            driver = resourceBundle.getString("db.driver");
+            url = resourceBundle.getString("db.url");
+            login = resourceBundle.getString("db.login");
+            password = resourceBundle.getString("db.password");
         } catch (NumberFormatException | MissingResourceException e) {
             LOG.fatal("Cannot initialize the database connection.", e);
             throw new RuntimeException("Cannot initialize the database connection.", e);

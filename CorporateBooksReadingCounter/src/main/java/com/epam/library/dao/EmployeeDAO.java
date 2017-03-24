@@ -69,7 +69,6 @@ public class EmployeeDAO extends AbstractDAO {
     }
 
     public void insertEmployee(String name, LocalDate dateOfBirth, String email) throws DAOException {
-        //TODO: use LocalDate
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_INSERT_EMPLOYEE)) {
             preparedStatement.setString(1, name);
             preparedStatement.setDate(2, Date.valueOf(dateOfBirth));
