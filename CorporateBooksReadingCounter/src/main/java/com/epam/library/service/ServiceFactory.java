@@ -4,6 +4,9 @@ package com.epam.library.service;
  *
  */
 public class ServiceFactory {
+    private ServiceFactory() {
+    }
+
     private static BookService bookService = new BookService();
     private static EmployeeService employeeService = new EmployeeService();
 

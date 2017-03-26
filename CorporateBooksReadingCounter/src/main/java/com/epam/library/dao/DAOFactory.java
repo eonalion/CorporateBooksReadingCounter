@@ -4,6 +4,9 @@ package com.epam.library.dao;
  *
  */
 public class DAOFactory {
+    private DAOFactory() {
+    }
+
     private static BookDAO bookDAO = new BookDAO();
     private static EmployeeDAO employeeDAO = new EmployeeDAO();
 
