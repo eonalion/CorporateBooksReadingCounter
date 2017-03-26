@@ -28,7 +28,7 @@ public class Controller {
             LOG.info("Input:");
             String input = bufferRead.readLine();
             input = input.trim();
-            int delimiter = input.indexOf(" ");
+            int delimiter = input.indexOf(' ');
             String commandString = null;
             String paramString = "";
             if (delimiter > 0) {

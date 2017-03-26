@@ -22,20 +22,20 @@ public class ConnectionManager {
     private Connection createConnection() {
         DatabaseInitializer dbInitializer = new DatabaseInitializer();
         try {
-            Class.forName(dbInitializer.DRIVER).newInstance();
+            Class.forName(dbInitializer.driver).newInstance();
         } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             LOG.fatal("Error while initializing database driver.", e);
             throw new RuntimeException("Error while initializing database driver.", e);
         }
 
-        Connection connection;
+        Connection newConnection;
         try {
-            connection = DriverManager.getConnection(dbInitializer.URL, dbInitializer.LOGIN, dbInitializer.PASSWORD);
+            newConnection = DriverManager.getConnection(dbInitializer.url, dbInitializer.login, dbInitializer.password);
         } catch (SQLException e) {
             LOG.fatal("Error while getting database connection.", e);
             throw new RuntimeException("Error while getting database connection.", e);
         }
-        return connection;
+        return newConnection;
     }
 
     public static void closeConnection() {

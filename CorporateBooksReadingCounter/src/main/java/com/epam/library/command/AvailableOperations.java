@@ -3,23 +3,24 @@ package com.epam.library.command;
 /**
  *
  */
-public class AvailableOperations {
-    public static final String MENU_COMMAND = "menu";
-    public static final String VIEW_COMMAND = "view";
-    public static final String REPORT_COMMAND = "report";
-    public static final String RENAME_COMMAND = "rename";
-    public static final String EXIT_COMMAND = "exit";
+class AvailableOperations {
+    private AvailableOperations() {
+    }
 
-    public static final String BOOKS_PARAM = "books";
-    public static final String EMPLOYEES_LONG_PARAM = "employees";
-    public static final String EMPLOYEES_SHORT_PARAM = "emps";
-    public static final String LESS_OR_EQ_THAN_2_PARAM = "<=2";
-    public static final String MORE_THAN_1_PARAM = ">1";
-    public static final String MASK_PARAM = "m";
-    public static final String TITLE_PARAM = "t";
-
-    public static final String INVALID_COMMAND_MESSAGE = "Failed: invalid command";
-    public static final String INVALID_PARAMETER_LIST_MESSAGE = "Failed: invalid parameter list";
-    public static final String INVALID_TITLE_MESSAGE = "Failed: no book with such title was found in database";
-    public static final String EXIT_MESSAGE = "Application was terminated";
+    static final String MENU_COMMAND = "menu";
+    static final String VIEW_COMMAND = "view";
+    static final String REPORT_COMMAND = "report";
+    static final String RENAME_COMMAND = "rename";
+    static final String EXIT_COMMAND = "exit";
+    static final String BOOKS_PARAM = "books";
+    static final String EMPLOYEES_LONG_PARAM = "employees";
+    static final String EMPLOYEES_SHORT_PARAM = "emps";
+    static final String LESS_OR_EQ_THAN_2_PARAM = "<=2";
+    static final String MORE_THAN_1_PARAM = ">1";
+    static final String MASK_PARAM = "m";
+    static final String TITLE_PARAM = "t";
+    static final String INVALID_COMMAND_MESSAGE = "Failed: invalid command";
+    static final String INVALID_PARAMETER_LIST_MESSAGE = "Failed: invalid parameter list";
+    static final String INVALID_TITLE_MESSAGE = "Failed: no book with such title was found in database";
+    static final String EXIT_MESSAGE = "Application was terminated";
 }

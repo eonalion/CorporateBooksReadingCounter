@@ -12,9 +12,6 @@ import org.apache.logging.log4j.Logger;
  *
  */
 public class ViewCommand implements ICommand {
-
-    //TODO: Add options to view single book and employee
-
     private static final Logger LOG = LogManager.getLogger();
     @Override
     public String execute(String params) {
@@ -28,7 +25,7 @@ public class ViewCommand implements ICommand {
     }
 
     private String processParameters(String params) throws ServiceException {
-        String reportString = "";
+        String reportString;
         switch (params) {
             case AvailableOperations.BOOKS_PARAM:
                 BookService bookService = ServiceFactory.getBookService();

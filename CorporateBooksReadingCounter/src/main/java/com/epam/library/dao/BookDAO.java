@@ -49,7 +49,6 @@ public class BookDAO extends AbstractDAO {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_SELECT_BOOK_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            //TODO: check in service if book is empty
             Book book = new Book();
             book.setTitle(resultSet.getString(COLUMN_TITLE));
             book.setAuthor(resultSet.getString(COLUMN_AUTHOR));
@@ -61,12 +60,12 @@ public class BookDAO extends AbstractDAO {
         }
     }
 
-    public void insertBook(String title, String author, String brief, int publish_year) throws DAOException {
+    public void insertBook(String title, String author, String brief, int publishYear) throws DAOException {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(SQL_INSERT_BOOK)) {
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, author);
             preparedStatement.setString(3, brief);
-            preparedStatement.setInt(4, publish_year);
+            preparedStatement.setInt(4, publishYear);
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DAOException("Error while inserting new book.", e);
