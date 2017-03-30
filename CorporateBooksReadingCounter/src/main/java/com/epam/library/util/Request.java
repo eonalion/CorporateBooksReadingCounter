@@ -1,11 +1,19 @@
-package com.epam.library.command;
+package com.epam.library.util;
 
 /**
  *
  */
-public class CommandContainer {
+public class Request {
     private String command;
     private String parameters;
+
+    public Request() {
+    }
+
+    public Request(String command, String parameters) {
+        this.command = command;
+        this.parameters = parameters;
+    }
 
     public void setCommand(String command) {
         this.command = command;

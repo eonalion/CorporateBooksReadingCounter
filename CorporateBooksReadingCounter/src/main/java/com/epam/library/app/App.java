@@ -1,9 +1,10 @@
 package com.epam.library.app;
 
-import com.epam.library.command.CommandContainer;
 import com.epam.library.command.CommandManager;
 import com.epam.library.controller.Controller;
 import com.epam.library.database.ConnectionManager;
+import com.epam.library.util.CLIReaderWriter;
+import com.epam.library.util.Request;
 
 /**
  *
@@ -22,14 +23,16 @@ public class App {
         System.out.println(START_MESSAGE);
         try {
             Controller controller = new Controller();
-            CommandContainer commandContainer;
+            Request request;
             do {
-                commandContainer = controller.read();
-                controller.process(commandContainer);
+                request = CLIReaderWriter.read();
+                CLIReaderWriter.write(controller.process(request));
             }
-            while (!CommandManager.isTerminatingCommand(commandContainer.getCommand()));
+            while (!CommandManager.isTerminatingCommand(request.getCommand()));
         } finally {
             ConnectionManager.closeConnection();
         }
     }
+
+
 }

@@ -1,9 +1,11 @@
 package com.epam.library.command;
 
+import com.epam.library.util.Response;
+
 /**
  *
  */
 @FunctionalInterface
 public interface ICommand {
-    String execute(String params);
+    Response execute(String params);
 }

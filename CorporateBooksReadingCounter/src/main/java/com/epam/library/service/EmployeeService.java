@@ -5,6 +5,7 @@ import com.epam.library.dao.EmployeeDAO;
 import com.epam.library.entity.Employee;
 import com.epam.library.exception.DAOException;
 import com.epam.library.exception.ServiceException;
+import com.epam.library.util.Response;
 
 import java.util.List;
 
@@ -12,17 +13,17 @@ import java.util.List;
  *
  */
 public class EmployeeService {
-    public String showAll() throws ServiceException {
+    public Response<List<Employee>> showAll() throws ServiceException {
         EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
         List<Employee> employeeList;
-        StringBuilder empListReport = new StringBuilder();
+        Response<List<Employee>> response = new Response<>();
         try {
             employeeList = employeeDAO.selectAllEmployees();
-            employeeList.forEach(e -> empListReport.append(e).append("\n"));
+            response.setContent(employeeList);
         } catch (DAOException e) {
             throw new ServiceException("Error while showing all employees", e);
         }
-        return empListReport.toString();
+        return response;
     }
 
     public String getSqlSelectEmpsWithMoreThanOneBook() throws ServiceException {

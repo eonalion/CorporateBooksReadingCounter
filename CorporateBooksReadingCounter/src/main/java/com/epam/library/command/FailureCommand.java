@@ -1,5 +1,7 @@
 package com.epam.library.command;
 
+import com.epam.library.util.Response;
+
 /**
  *
  */
@@ -11,7 +13,10 @@ public class FailureCommand implements ICommand {
     }
 
     @Override
-    public String execute(String params) {
-        return this.failureMessage;
+    public Response<String> execute(String params) {
+        Response<String> response = new Response<>();
+        response.setError(true);
+        response.setContent(failureMessage);
+        return response;
     }
 }

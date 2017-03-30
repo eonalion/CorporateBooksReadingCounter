@@ -1,5 +1,7 @@
 package com.epam.library.command;
 
+import com.epam.library.util.Response;
+
 import java.util.Map;
 
 /**
@@ -7,8 +9,9 @@ import java.util.Map;
  */
 public class ViewMenuCommand implements ICommand {
     @Override
-    public String execute(String param) {
-        String response;
+    public Response<String> execute(String param) {
+        Response<String> response = new Response<>();
+        String responseString;
         if (param.isEmpty()) {
             StringBuilder builder = new StringBuilder();
             Map<String, ICommand> commands = CommandManager.getCommands();
@@ -21,10 +24,14 @@ public class ViewMenuCommand implements ICommand {
                         builder.append("\n");
                     }
             );
-            response = builder.toString();
+            responseString = builder.toString();
         } else {
-            response = AvailableOperations.INVALID_PARAMETER_LIST_MESSAGE;
+            response.setError(true);
+            responseString = AvailableOperations.INVALID_PARAMETER_LIST_MESSAGE;
         }
+
+        response.setContent(responseString);
+
         return response;
     }
 }

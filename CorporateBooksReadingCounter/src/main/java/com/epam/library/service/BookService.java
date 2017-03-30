@@ -5,26 +5,24 @@ import com.epam.library.dao.DAOFactory;
 import com.epam.library.entity.Book;
 import com.epam.library.exception.DAOException;
 import com.epam.library.exception.ServiceException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.epam.library.util.Response;
 import java.util.List;
 
 /**
  *
  */
 public class BookService {
-    public String showAll() throws ServiceException {
+    public Response<List<Book>> showAll() throws ServiceException {
         BookDAO bookDAO = DAOFactory.getBookDAO();
+        Response<List<Book>> response = new Response<>();
         List<Book> bookList;
-        StringBuilder bookListReport = new StringBuilder();
         try {
             bookList = bookDAO.selectAllBooks();
-            bookList.forEach(b -> bookListReport.append(b).append("\n"));
+            response.setContent(bookList);
         } catch (DAOException e) {
             throw new ServiceException("Error while showing all books", e);
         }
-        return bookListReport.toString();
+        return response;
     }
 
     public boolean renameBook(String titleOrMask, String newTitle, boolean byMask) throws ServiceException {

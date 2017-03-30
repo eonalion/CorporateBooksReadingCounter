@@ -5,6 +5,7 @@ import com.epam.library.exception.ServiceException;
 import com.epam.library.service.BookService;
 import com.epam.library.service.EmployeeService;
 import com.epam.library.service.ServiceFactory;
+import com.epam.library.util.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,32 +14,33 @@ import org.apache.logging.log4j.Logger;
  */
 public class ViewCommand implements ICommand {
     private static final Logger LOG = LogManager.getLogger();
+
     @Override
-    public String execute(String params) {
-        String response = "";
+    public Response execute(String params) {
+        String reportString;
+        Response response;
         try {
-            response = processParameters(params);
+            switch (params) {
+                case AvailableOperations.BOOKS_PARAM:
+                    BookService bookService = ServiceFactory.getBookService();
+                    response = bookService.showAll();
+                    break;
+                case AvailableOperations.EMPLOYEES_LONG_PARAM:
+                case AvailableOperations.EMPLOYEES_SHORT_PARAM:
+                    EmployeeService employeeService = ServiceFactory.getEmployeeService();
+                    response = employeeService.showAll();
+                    break;
+                default:
+                    response = new Response<String>();
+                    response.setContent(AvailableOperations.INVALID_PARAMETER_LIST_MESSAGE);
+            }
         } catch (ServiceException e) {
             LOG.error("Error while executing 'view' command", e);
+            response = new Response<String>();
+            response.setError(true);
+            response.setContent(AvailableOperations.INVALID_PARAMETER_LIST_MESSAGE);
         }
-        return response;
-    }
 
-    private String processParameters(String params) throws ServiceException {
-        String reportString;
-        switch (params) {
-            case AvailableOperations.BOOKS_PARAM:
-                BookService bookService = ServiceFactory.getBookService();
-                reportString = bookService.showAll();
-                break;
-            case AvailableOperations.EMPLOYEES_LONG_PARAM:
-            case AvailableOperations.EMPLOYEES_SHORT_PARAM:
-                EmployeeService employeeService = ServiceFactory.getEmployeeService();
-                reportString = employeeService.showAll();
-                break;
-            default:
-                reportString = AvailableOperations.INVALID_PARAMETER_LIST_MESSAGE;
-        }
-        return reportString;
+        return response;
     }
 }
